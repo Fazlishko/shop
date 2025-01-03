@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load loft_tags %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block slider %}
+
+{% endblock slider %}
+
+
+
+{% block main %}
+
+<main class="main">
+            <div class="profile">
+                <div class="container">
+                    <div class="profile__content">
+                        <form class="profile__form" method="post">
+                            {% csrf_token %}
+                            <h2 class="profile__title">Личные данные</h2>
+                            <div class="profile__form-grid">
+
+                                <div class="input__title">
+                                    <h2>Имя</h2>
+                                    {{ account_form.first_name }}
+                                </div>
+                                <div class="input__title">
+                                    <h2>E-mail</h2>
+                                    {{ account_form.email }}
+                                </div>
+                                <div class="input__title">
+                                    <h2>Фамилия</h2>
+                                    {{ account_form.last_name }}
+                                </div>
+                                <div class="input__title">
+                                    <h2>Номер телефона</h2>
+                                    {{ profile_form.phone }}
+                                </div>
+
+                                <div class="input__title">
+                                    <h2>Регион</h2>
+                                    {{ profile_form.region }}
+                                </div>
+
+                                <div class="input__title">
+                                    <h2>Город</h2>
+                                    {{ profile_form.city }}
+                                </div>
+
+                                <div></div>
+                                <div class="input__title _span-two">
+                                    <h2>Адрес</h2>
+                                    {{ profile_form.address }}
+                                </div>
+
+                            </div>
+
+                            <button class="btn profile__btn" type="submit">Изменить</button>
+
+                        </form>
+
+                        {% include 'loft/components/_my_orders.html' %}
+
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+{% endblock main %}
+

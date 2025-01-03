@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load loft_tags %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block slider %}
+
+<section class="basket">
+                    <div class="basket__text">
+                        <h1 class="basket__title">Ваша корзина {% if not order_products %}пуста{% endif %}</h1>
+                        <span class="basket__count"><span>{{ order.get_order_total_quantity }}</span> товара</span>
+                    </div>
+                    <div class="basket__items">
+                        {% for item in  order_products %}
+                        <div class="basket__item">
+                            <a href="{{ item.product.get_absolute_url }}" class="basket__item-img">
+                                <img src="{{ item.product.get_first_photo }}" alt="product">
+                            </a>
+                            <div class="basket__item-content">
+                                <div class="basket__item-text">
+                                    <h2 class="basket__item-title">{{ item.product.title }}</h2>
+                                    <p class="basket__item-price">
+                                        {% if item.product.discount %}
+                                        <span class="discount">
+                                            <i class="far fa-badge-percent"></i>
+                                            -{{ item.product.discount }}%
+                                        </span>
+                                        {% endif %}
+
+                                        <span class="old__price"><span>{% get_normal_price item.total_price %}</span>₽</span>
+                                        <span class="price"><span>{% get_normal_price item.get_total_price %}</span>₽</span>
+
+                                    </p>
+                                </div>
+                                <div class="basket__options">
+                                    <p class="basket__options-color">
+                                        Цвет:
+                                        <span class="color__name">{{  item.product.color_name }}</span>
+                                        <span class="color__block" style="background: {{ item.product.color_code }};"></span>
+                                    </p>
+                                    <p class="basket__options-count">
+                                        Количество:
+                                        <a href="{% url 'add_product' item.product.slug 'delete' %}" class="plus_cart">-</a>
+                                        <span>{{ item.quantity }}</span>
+                                        <a href="{% url 'add_product' item.product.slug 'add' %}" class="plus_cart">+</a>
+                                    </p>
+                                    <p class="basket__options-size">
+                                        Размер(Ш×Д×В):
+                                        <span>{{ item.product.width }} СМ × {{ item.product.depth }} СМ × {{ item.product.height }} СМ</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <a href="{% url 'delete' item.pk item.order.id %}" class="basket__delete">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% if order_products %}
+                    <form class="products__form">
+                        <span>Итоговая стоимость:<span class="products__form-price">{% get_normal_price order.get_order_total_price %}₽</span> </span>
+                        <a href="{% url 'checkout' %}" class="btn products__form-btn">Оформить заказ</a>
+                    </form>
+                    {% endif %}
+                </section>
+
+{% endblock slider %}
+
+
+
+<!--Вывод рекомендаций-->
+{% block main %}
+<main class="main">
+            <div class="container">
+                <section class="products">
+                    <h2 class="products__title">Хиты продаж</h2>
+                    <div class="products__content">
+
+                        <!-- /.products__item -->
+                                {% for product in products %}
+                                    {% include 'loft/components/_card.html' %}
+                                {% endfor %}
+
+                    </div>
+                    <!-- /.products__content -->
+                </section>
+                <!-- /.products -->
+            </div>
+            <!-- /.container -->
+        </main>
+{% endblock main %}
+
+
+
+
+
+

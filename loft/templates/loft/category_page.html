@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block slider %}
+{% include 'loft/components/_filters.html' %}
+{% endblock slider %}
+
+{% block main %}
+<main class="main">
+            <div class="container">
+                <section class="products">
+                    <h2 class="products__title">{{ title }}</h2>
+                    <div class="products__content">
+
+                        <!-- /.products__item -->
+                                {% for product in products %}
+                                    {% include 'loft/components/_card.html' %}
+                                {% endfor %}
+
+                    </div>
+                    <!-- /.products__content -->
+                </section>
+
+                <!--       PAGINATION START         -->
+                {% include 'loft/components/_pagination.html' %}
+
+                <!--       PAGINATION END         -->
+
+                <!-- /.products -->
+            </div>
+            <!-- /.container -->
+        </main>
+{% endblock main %}

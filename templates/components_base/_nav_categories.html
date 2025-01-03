@@ -1,0 +1,29 @@
+{% load loft_tags %}
+{% load static %}
+<ul class="nav__list _categories">
+    <li>
+        <h2 class="nav__title nav__title-categories">Категории</h2>
+    </li>
+
+    {% get_categories as categories %}
+    {% for category in categories %}
+    <li>
+        <a href="{{ category.get_absolute_url }}" class="nav__list-links">
+            <img src="{{ category.get_icon }}" alt="icons">{{ category.title }}
+        </a>
+    </li>
+    {% endfor %}
+
+    <li>
+        <a href="#!" class="nav__list-links">
+            <img src="{% static 'loft/assets/icons/nav_menu/Vector.svg' %}" alt="icons">
+            Акция
+        </a>
+    </li>
+
+
+
+</ul>
+
+
+

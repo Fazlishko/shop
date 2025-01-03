@@ -1,0 +1,75 @@
+{% load loft_tags %}
+
+<div class="products_filter">
+                <div class="container">
+                    <div class="row justify-content-around">
+
+
+                        <div class="dropdown pt-2 pt-lx-0">
+                            <button class="products_filter-dropdown dropdown-toggle rounded" type="button" id="dropdownColor"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if query.sub %}{{ query.sub }}{% else %}Категори товаров{% endif %}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownColor">
+                                {% for subcategory in subcategories %}
+                                <li><a class="dropdown-item" href="?{% query_params sub=subcategory.title page=1 %}">{{ subcategory.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="dropdown pt-2 pt-lx-0">
+                            <button class="products_filter-dropdown dropdown-toggle rounded" type="button"
+                                id="dropdownStrapType" data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if query.color_name %}{{ query.color_name }}{% else %}Цвета{% endif %}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownStrapType">
+                                {% for color_name in color_names %}
+                                <li><a class="dropdown-item" href="?{% query_params color_name=color_name page=1 %}">{{ color_name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="dropdown pt-2 pt-lx-0">
+                            <button class="products_filter-dropdown dropdown-toggle rounded" type="button" id="dropdownSort"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if query.model %}{{ query.model }}{% else %}Модели{% endif %}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownSort">
+                                {% for model in models %}
+                                <li><a class="dropdown-item" href="?{% query_params model=model page=1 %}">{{ model }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+
+                        <div class="dropdown pt-2 pt-lx-0">
+                            <button class="products_filter-dropdown dropdown-toggle rounded" type="button"
+                                id="dropdownPriceFrom" data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if query.from %}{{ query.from }}{% else %}Цена от{% endif %}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownPriceFrom">
+                                {% for price in prices %}
+                                <li><a class="dropdown-item" href="?{% query_params from=price page=1 %}">{{ price }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="dropdown pt-2 pt-lx-0">
+                            <button class="products_filter-dropdown dropdown-toggle rounded" type="button"
+                                id="dropdownPriceTill" data-bs-toggle="dropdown" aria-expanded="false">
+                                {% if query.till %}{{ query.till }}{% else %}Цена до{% endif %}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownPriceTill">
+                                {% for price in prices %}
+                                <li><a class="dropdown-item" href="?{% query_params till=price page=1 %}">{{ price }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
